@@ -7,3 +7,7 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+%w{ 'Book A', 'Book B', 'Book C'}.each do |title|
+  Book.create title: title
+end

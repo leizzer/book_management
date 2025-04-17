@@ -1,7 +1,9 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  email: MyString
+  email: bob@mail.com
+  book_id: <%= Book.create(title: "My book One").id %>
 
 two:
-  email: MyString
+  email: steve@mail.com
+  book_id: <%= Book.create(title: "My book Two").id %>
