@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
-  resources :reservations
+  resources :reservations, only: [:index, :show]
 
-  resources :books do
+  resources :books, except: [:destroy] do
     member do
-      post :reserve, to: "reservations#create"
+      post :reserve
     end
   end
 

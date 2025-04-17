@@ -1,5 +1,7 @@
 class BooksController < ApplicationController
-  before_action :set_book, only: %i[ show update destroy ]
+  before_action :set_book, only: %i[ show update destroy reserve ]
+
+  rescue_from ActiveRecord::RecordInvalid, with: :show_record_errors
 
   # GET /books
   def index
@@ -38,6 +40,11 @@ class BooksController < ApplicationController
     @book.destroy!
   end
 
+  def reserve
+    @book.reserve!(reservation_params)
+    render json: @book
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_book
@@ -47,5 +54,13 @@ class BooksController < ApplicationController
     # Only allow a list of trusted parameters through.
     def book_params
       params.expect(book: [ :title ])
+    end
+
+    def reservation_params
+      params.expect(:email)
+    end
+
+    def show_record_errors(exception)
+      render json: @book.errors, status: :unprocessable_entity
     end
 end

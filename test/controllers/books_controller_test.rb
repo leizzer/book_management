@@ -28,11 +28,12 @@ class BooksControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should destroy book" do
-    assert_difference("Book.count", -1) do
-      delete book_url(@book), as: :json
+  test "should reserve book" do
+    book = Book.create(title: "Test Book")
+    assert_difference("Reservation.count") do
+      post reserve_book_url(book), params: {email: "chuck@mail.com"}, as: :json
     end
 
-    assert_response :no_content
+    assert_response :success
   end
 end

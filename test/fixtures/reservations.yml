@@ -2,8 +2,10 @@
 
 one:
   email: bob@mail.com
-  book_id: <%= Book.create(title: "My book One").id %>
+  book: one
+  expiration_date: <%= DateTime.now + 7.days %>
 
 two:
   email: steve@mail.com
-  book_id: <%= Book.create(title: "My book Two").id %>
+  book: two
+  expiration_date: <%= DateTime.now + 7.days %>
